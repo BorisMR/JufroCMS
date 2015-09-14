@@ -38,7 +38,7 @@ public class MiConfiguracion extends JufroApplication {
         
         mimenu.addMenuItemFromContent("Home",1);
         mimenu.addMenuItemFromContent("Servicios",2);
-        mimenu.addMenuItemFromHtml("Productos","C:\\Users\\Felipe\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\estatico.html");
+        mimenu.addMenuItemFromHtml("Productos","C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\estatico.html");
         mimenu.addMenuItemFromJSP("Servicios","dinamico.jsp");
         mimenu.addMenuItemFromJSP("Diseños", "estilo.jsp");
         this.setMenu(mimenu);        

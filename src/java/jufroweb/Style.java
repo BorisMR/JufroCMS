@@ -19,8 +19,7 @@ public class Style {
     private String error="";
   
 public void Style () {
-    //this.load(id);
-   
+    //this.load(id);   
 }
   
 public String getContent() {
@@ -36,39 +35,35 @@ public String generateHtml(){
         s.execute("Select ID, NAME from STYLES");
         ResultSet r = s.getResultSet();
         if (r!=null){
-            con = "<form method='POST' action='Estilo'>";
-            con += "<select size=30 name='opsel' id='opsel'><optgroup label='Selecciona Un Layout'>";
+            con = "<form method='POST' action='Estilo'>\n"
+                +"<img align='middle' height='200' width='200' src='images/noImage.png'/>\n"
+                +"<div id='divVistaPrevia'></div>"
+                + "<select size=30 name='opsel' id='opsel'><optgroup label='Selecciona Un Layout'>\n";
+            
             while (r.next()){
                 con += "<option value='"+r.getInt("ID")+"'>"+r.getString("NAME")+"</option>\n";
             }
-            con += "</select>"
-                +"<input type='submit' id='cambiar' value='Establecer Layout'>"
-                +"<input type='submit' id='borrar' value='Borrar Layout' name='action'/>"
+            
+            con += "</select>\n"
+                +"<input type='submit' id='cambiar' value='Cargar'>"
+                +"<input type='submit' id='borrar' value='Eliminar' name='action'/>"
             +"</form>";
             ret += con;
         }
         ret+="</td>"
                 +"<td>"
-                    +"<img align='middle' height='200' width='200' src='images/noImage.png'/>"
-                /*    
-                +"<form method='GET' action='subidor.jsp'>"
-                    
-                    +"<p>Dirección imágen</p><input type='file' name='pic' accept='image/*' placeholder='Archivo Imagen'required/>"
-                    +"<p>Dirección html</p><input type='file' accept='layout/*'required/>"
-                    +"<input type='submit' value='Subir  Layout'/>"
-                +"</form>"
-        */
                     +"<h2>Uploader Layouts</h2>"
                     +"<form method='POST' action='upload_file.jsp' enctype='multipart/form-data'>"
-                        +"<label for='uploadFile'>Selecciona imagen a Subir: </label>\n"
-                        +"<input type='file' name='pic' accept='image/*' placeholder='Archivo Imagen'/>"
-                        +"<label for='uploadFile'>Selecciona layout a Subir: </label>"
+                        +"<label for='uploadFile'>Imagen previa para Layout: </label>\n"
+                        +"<input type='file' name='pic' accept='image/*'/>"
+                        +"<label for='uploadFile'>Layout para Subir: </label>"
                         +"<input type='file'/ name='layout' required>"
                         +"+<input type='submit' value='Subir Layout' />"
                     +"</form>"
                 +"</td>"
             +"</tr>"
         +"</table>";
+        //
     }catch (SQLException e){
         this.tonull(-2);
         this.error = e.getMessage();

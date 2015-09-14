@@ -9,7 +9,7 @@
         <%
         
         MiConfiguracion miweb = new MiConfiguracion();
-        Style stl = new Style();       
+        Style stl = new Style();
         miweb.setContent(stl.generateHtml(),request,session);
         out.print(miweb.getWebPage()); 
         
@@ -25,13 +25,5 @@
                 text-align: center;
                 font-weight: bold;
                 border-radius: 5px 0px;
-            }
-            
-            #cambiar{
-                height: 40px;
-                width: 100px;
-                background-color: black;
-                color: white;
-                border-radius: 0px 15px;
             }
         </style>
