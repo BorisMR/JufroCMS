@@ -93,11 +93,8 @@ public class StyleChang extends HttpServlet {
             MiConfiguracion miweb = new MiConfiguracion();
             int layoutSelected = Integer.parseInt(request.getParameter("opsel"));
             int layoutInUse;
-            //String layoutSelectedDel = null;
-            //String relPath = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\";
             String relPath = miweb.getRelPath();
             String layoutSelectedDel = request.getParameter("action");
-
 
             JufroCMSConnection conec = new JufroCMSConnection();
             Statement stm = conec.createStatement();
@@ -107,9 +104,7 @@ public class StyleChang extends HttpServlet {
                 stm.execute("SELECT SELSTYLE FROM CONFIG");
                 ResultSet result = stm.getResultSet();
                 result.next();
-                layoutInUse = result.getInt(1);
-                
-                
+                layoutInUse = result.getInt(1); 
                 
                 if(layoutSelected == layoutInUse){
                     stm.execute("UPDATE CONFIG SET SELSTYLE = 0");
