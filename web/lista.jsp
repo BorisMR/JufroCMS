@@ -1,4 +1,4 @@
-<%@page import="jufroweb.Style"%>
+<%@page import="jufroweb.Layout"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="jufroweb.JufroCMSConnection"%>
@@ -6,14 +6,14 @@
 <%@page import="miaplicacionweb.MiConfiguracion"%>
 <%@page import="jufroweb.Content"%>
 
-        <%
-        
-        MiConfiguracion miweb = new MiConfiguracion();
-        Style stl = new Style();
-        miweb.setContent(stl.generateHtml(),request,session);
-        out.print(miweb.getWebPage()); 
-        
-        %>
+<%
+
+    MiConfiguracion miweb = new MiConfiguracion();
+    Layout stl = new Layout();
+    miweb.setContent(stl.generarHtmlLista(),request,session);
+    out.print(miweb.getWebPage()); 
+
+%>
         
         <style>
             #opsel{
