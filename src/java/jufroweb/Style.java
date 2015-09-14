@@ -35,7 +35,7 @@ public String generateHtml(){
         s.execute("Select ID, NAME from STYLES");
         ResultSet r = s.getResultSet();
         if (r!=null){
-            con = "<form method='POST' action='Estilo'>\n"
+            con = "<form method='POST' action='StyleChang'>\n"
                 +"<img align='middle' height='200' width='200' src='images/noImage.png'/>\n"
                 +"<div id='divVistaPrevia'></div>"
                 + "<select size=30 name='opsel' id='opsel'><optgroup label='Selecciona Un Layout'>\n";
@@ -53,7 +53,8 @@ public String generateHtml(){
         ret+="</td>"
                 +"<td>"
                     +"<h2>Uploader Layouts</h2>"
-                    +"<form method='POST' action='upload_file.jsp' enctype='multipart/form-data'>"
+                    //+"<form method='POST' action='upload_file.jsp' enctype='multipart/form-data'>"
+                    +"<form method='POST' action='Uploader' enctype='multipart/form-data'>"
                         +"<label for='uploadFile'>Imagen previa para Layout: </label>\n"
                         +"<input type='file' name='pic' accept='image/*'/>"
                         +"<label for='uploadFile'>Layout para Subir: </label>"

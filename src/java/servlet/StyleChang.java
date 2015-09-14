@@ -29,9 +29,9 @@ import miaplicacionweb.MiConfiguracion;
  */
 
 //No tocar
-@WebServlet(name = "Estilo", urlPatterns = {"/Estilo"})
+@WebServlet(name = "StyleChang", urlPatterns = {"/StyleChang"})
 //
-public class Estilo extends HttpServlet {
+public class StyleChang extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -166,7 +166,7 @@ public class Estilo extends HttpServlet {
         catch(SQLException e){
 
         }catch (ClassNotFoundException ex) {
-            Logger.getLogger(Estilo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StyleChang.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
