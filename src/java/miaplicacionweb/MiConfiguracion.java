@@ -5,13 +5,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import jufroweb.*;
 
-
 public class MiConfiguracion extends JufroApplication {
+    
+    String relPATH = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\";
+    
     public MiConfiguracion() throws SQLException, ClassNotFoundException {
         
         int layoutSelected;
-        String layoutName = null;
-        String relPath = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\";
+        String relPath = this.relPATH;
         
         JufroCMSConnection conec = new JufroCMSConnection();
         Statement stm = conec.createStatement();
@@ -27,7 +28,7 @@ public class MiConfiguracion extends JufroApplication {
             stm.execute("SELECT NAME FROM STYLES WHERE ID="+layoutSelected);
             ResultSet result2 = stm.getResultSet();
             result2.next();
-            layoutName = result2.getString("NAME");
+            String layoutName = result2.getString("NAME");
             this.setLayout(relPath+"layouts\\"+layoutName);
         }
         this.addWidgetFromFile(relPath+"widget1.html");
@@ -38,9 +39,14 @@ public class MiConfiguracion extends JufroApplication {
         
         mimenu.addMenuItemFromContent("Home",1);
         mimenu.addMenuItemFromContent("Servicios",2);
-        mimenu.addMenuItemFromHtml("Productos","C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\estatico.html");
+        mimenu.addMenuItemFromHtml("Productos",this.relPATH+"estatico.html");
         mimenu.addMenuItemFromJSP("Servicios","dinamico.jsp");
         mimenu.addMenuItemFromJSP("Diseños", "estilo.jsp");
         this.setMenu(mimenu);        
+    }
+    
+    public String getRelPath(){
+        String retValue = this.relPATH;
+        return retValue;
     }
 }

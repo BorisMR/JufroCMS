@@ -95,8 +95,8 @@ public class StyleChang extends HttpServlet {
             int layoutSelected = Integer.parseInt(request.getParameter("opsel"));
             int layoutInUse;
             //String layoutSelectedDel = null;
-            String relPath = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\";
-
+            //String relPath = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\";
+            String relPath = miweb.getRelPath();
             String layoutSelectedDel = request.getParameter("action");
 
 

@@ -91,8 +91,9 @@ public class Uploader extends HttpServlet {
         PrintWriter out = response.getWriter();
         //processRequest(request, response);
         try{
-            String filePathLayout = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\layouts\\";
-            String filePathImages = "C:\\Users\\MULTIVAC\\Documents\\NetBeansProjects\\GithubProjects\\JufroCMS\\web\\images\\";
+            MiConfiguracion miweb = new MiConfiguracion();
+            String filePathLayout = miweb.getRelPath()+"layouts\\";
+            String filePathImages = miweb.getRelPath()+"images\\";
             String fileAuxLay = null;
             String fileAuxImg = null;
             String fileName = null;
@@ -128,7 +129,7 @@ public class Uploader extends HttpServlet {
             }
             stmnt.execute("INSERT INTO STYLES ( NAME, LAYOUTPATH, IMAGEPATH) VALUES ( '"+fileName+"','"+fileAuxLay+"','"+fileAuxImg+"')");
 
-            MiConfiguracion miweb = new MiConfiguracion();
+            
             miweb.setFooter("Zhurdazo Productions Co.<br>+562345321, Techmuco EcoSoftware Space<br>Powered by &copy; JUFRO");
             HttpSession session = null;
             miweb.setContent("<b>Archivo Subido</b>",request,session);
