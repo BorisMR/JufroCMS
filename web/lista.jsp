@@ -16,8 +16,8 @@
 %>
 <style>
     #opsel{
-        width: 400px;
-        height: 300px;
+        width: 200px;
+        height: 150px;
         background-color: black;
         color: white;
         font-style: italic;
@@ -31,14 +31,14 @@
 <script>
     var idLayout = 0;
     function cambiarImagen(valID){
-            console.log(valID);
-       
-           $(document).ready(function(){
-               $.get('obtenerImagen.jsp?layout='+ valID, function( data ) {
-                    $('#prevImg').attr('src', data);
-                })
-           })
-       }
+        console.log(valID);
+
+        $(document).ready(function(){
+            $.get('obtenerImagen.jsp?layout='+ valID, function( data ) {
+                $('#prevImg').attr('src', data);
+            })
+        })
+    }
 </script>
     
         

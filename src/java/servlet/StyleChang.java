@@ -20,16 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jufroweb.JufroCMSConnection;
+import jufroweb.Layout;
 import miaplicacionweb.MiConfiguracion;
-
-/**
- *
- * @author Felipe
- */
 
 //No tocar
 @WebServlet(name = "StyleChang", urlPatterns = {"/StyleChang"})
-//
+
 public class StyleChang extends HttpServlet {
 
     /**
@@ -88,55 +84,55 @@ public class StyleChang extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        //processRequest(request, response);
+//        processRequest(request, response);
         try{
             MiConfiguracion miweb = new MiConfiguracion();
             int layoutSelected = Integer.parseInt(request.getParameter("opsel"));
             int layoutInUse;
             String relPath = miweb.getRelPath();
             String layoutSelectedDel = request.getParameter("action");
-
+            
+            Layout lay = new Layout();
+                      
             JufroCMSConnection conec = new JufroCMSConnection();
             Statement stm = conec.createStatement();
 
             if(layoutSelectedDel != null && layoutSelectedDel.equalsIgnoreCase("Eliminar")){
-                //el siguiente if debe verificar si es que se va a borrar el mismo layout que esta aplicado
+                //obtiene el layout en uso
                 stm.execute("SELECT SELSTYLE FROM CONFIG");
                 ResultSet result = stm.getResultSet();
                 result.next();
                 layoutInUse = result.getInt(1); 
                 
                 if(layoutSelected == layoutInUse){
-                    stm.execute("UPDATE CONFIG SET SELSTYLE = 0");
-                    stm.execute("DELETE FROM STYLES WHERE ID = "+layoutSelected);
+//                  
+                    lay.eliminarLayoutEnBBDD(layoutInUse, true);
                     /*
+                    bloque que borra el archivo fisico
                     stm.execute("SELECT LAYOUTHPATH FROM STYLES WHERE ID="+layoutSelected);
                     ResultSet resultDel = stm.getResultSet();
                     resultDel.next();
                     String layoutToDel = result.getString("LAYOUTPATH");
                     File ficheroaBorrar = new File(layoutToDel);
                     ficheroaBorrar.delete();
-                    */                    
+                     */                   
                     miweb.setLayout(relPath+"layouts\\layoutDefault.html");
                     miweb.setFooter("Zhurdazo Productions Co.<br>+562345321, Techmuco EcoSoftware Space<br>Powered by &copy; JUFRO");
                     HttpSession session = null;
                     miweb.setContent("<b>LAYOUT ELIMINADO</b>",request,session);
-                    //Style stl = new Style();
-                    //miweb.setContent(stl.generateHtml(),request,session);
                     miweb.setHeader("Can&iacute;bales del Tiempo, RAD to your life");
                     out.print(miweb.getWebPage()); 
                 }else{
-                    stm.execute("DELETE FROM STYLES WHERE ID = "+layoutSelected);
+                    lay.eliminarLayoutEnBBDD(layoutInUse, false);
+                    
                     miweb.setFooter("Zhurdazo Productions Co.<br>+562345321, Techmuco EcoSoftware Space<br>Powered by &copy; JUFRO");
                     HttpSession session = null;
-                    //Style stl = new Style();
-                    //miweb.setContent(stl.generateHtml(),request,session);
                     miweb.setContent("<b>LAYOUT ELIMINADO</b>",request,session);
                     miweb.setHeader("Can&iacute;bales del Tiempo, RAD to your life");
                     out.print(miweb.getWebPage());
                 }
-
-            }else{            
+            }else{
+                //El Siguente Bloque Aplica Estilos
                 stm.execute("UPDATE CONFIG SET SELSTYLE = "+layoutSelected);
                 stm.execute("SELECT NAME FROM STYLES WHERE ID="+layoutSelected);
                 ResultSet result = stm.getResultSet();
@@ -148,9 +144,7 @@ public class StyleChang extends HttpServlet {
                     miweb.setLayout(relPath+"layouts\\layoutDefault.html");
                 }
                 miweb.setFooter("Zhurdazo Productions Co.<br>+562345321, Techmuco EcoSoftware Space<br>Powered by &copy; JUFRO");
-                    HttpSession session = null;
-                    //Style stl = new Style();
-                    //miweb.setContent(stl.generateHtml(),request,session);
+                HttpSession session = null;
                 miweb.setContent("<b>LAYOUT MODIFICADO</b>",request,session);
                 miweb.setHeader("Can&iacute;bales del Tiempo, RAD to your life");
 

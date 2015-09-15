@@ -20,7 +20,6 @@ public class MiConfiguracion extends JufroApplication {
         ResultSet result = stm.getResultSet();
         result.next();
         layoutSelected = result.getInt(1);
-        
         //0 indica que fue borrado el layout que estaba siendo usado, por esto se establece la carga de un default
         if( layoutSelected == 0){
             this.setLayout(relPath+"layouts\\layoutDefault.html");
